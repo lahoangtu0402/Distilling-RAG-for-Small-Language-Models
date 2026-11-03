@@ -1,0 +1,43 @@
+distilling-rag-for-small-language-models/
+├── data/                         # Thư mục chứa dữ liệu đầu vào
+│   ├── raw/                      # Dữ liệu gốc tải về (ARC-Challenge, MedMCQA, MMLU...)
+│   └── processed/                # Dữ liệu pilot đã trích xuất (jsonl, csv)
+│       ├── arc_challenge_pilot.jsonl
+│       └── medmcqa_pilot.jsonl
+│
+├── outputs/                      # Thư mục lưu kết quả trung gian & kết quả thực nghiệm
+│   ├── evidences/                # Bằng chứng được Teacher LLM sinh ra
+│   ├── graphs/                   # Knowledge Graphs (triples) dạng đơn/đa đồ thị
+│   └── eval_results/             # Kết quả log accuracy, metrics của Student SLM
+│
+├── src/                          # Mã nguồn chính của dự án
+│   ├── __init__.py
+│   ├── config.py                 # File cấu hình (API Keys, Paths, Hyperparameters)
+│   ├── teacher/                  # Module giao tiếp với Teacher LLM
+│   │   ├── __init__.py
+│   │   ├── generator.py          # Evidence Generation (Step 1)
+│   │   └── graph_extractor.py    # Graph Triple Extraction & Aggregation (Step 3)
+│   │
+│   ├── retriever/                # Module xếp hạng & lọc bằng chứng
+│   │   ├── __init__.py
+│   │   └── ranker.py             # Cosine Sim + LLM Score Ranking (Step 2)
+│   │
+│   ├── student/                  # Module chạy và đánh giá Student SLM trên Mac M2
+│   │   ├── __init__.py
+│   │   ├── local_runner.py       # Chạy PyTorch (MPS) hoặc Ollama Local
+│   │   └── evaluator.py          # Tính Accuracy, F1,... (Step 4)
+│   │
+│   └── utils/                    # Các hàm phụ trợ
+│       ├── __init__.py
+│       ├── data_loader.py        # Đọc/ghi các file dữ liệu JSONL
+│       └── metrics.py            # Hàm tính độ chính xác
+│
+├── scripts/                      # Các script chạy thực nghiệm tự động
+│   ├── prepare_data.py           # Script chuẩn bị dữ liệu pilot (300-500 câu)
+│   ├── run_pipeline.py           # Script chạy toàn bộ pipeline DRAG
+│   └── run_baselines.py          # Script chạy so sánh với SLM gốc (Original SLM)
+│
+├── .env                          # Lưu biến môi trường (OPENAI_API_KEY,...)
+├── .gitignore                    # Bỏ qua data/raw, outputs/, .env, venv/
+├── requirements.txt              # Thư viện Python cần thiết
+└── README.md                     # Hướng dẫn chạy thực nghiệm & mô tả bài báo

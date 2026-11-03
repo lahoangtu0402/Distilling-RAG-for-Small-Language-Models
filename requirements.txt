@@ -1,0 +1,12 @@
+openai>=1.0.0
+python-dotenv>=1.0.0
+datasets>=3.0.0
+torch>=2.0.0
+transformers>=4.40.0
+sentence-transformers>=3.0.0
+scikit-learn>=1.4.0
+pandas>=2.0.0
+tqdm>=4.66.0
+accelerate>=1.0.0
+urllib3<2.0.0
+
