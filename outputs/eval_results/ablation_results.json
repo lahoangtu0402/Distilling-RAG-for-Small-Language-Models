@@ -1,0 +1,93 @@
+[
+  {
+    "K": 0,
+    "Configuration": "original",
+    "Accuracy (%)": 85.0,
+    "Correct": 85,
+    "Total": 100
+  },
+  {
+    "K": 5,
+    "Configuration": "evidence_only",
+    "Accuracy (%)": 84.0,
+    "Correct": 84,
+    "Total": 100
+  },
+  {
+    "K": 5,
+    "Configuration": "graph_only",
+    "Accuracy (%)": 83.0,
+    "Correct": 83,
+    "Total": 100
+  },
+  {
+    "K": 5,
+    "Configuration": "combined",
+    "Accuracy (%)": 83.0,
+    "Correct": 83,
+    "Total": 100
+  },
+  {
+    "K": 10,
+    "Configuration": "evidence_only",
+    "Accuracy (%)": 92.0,
+    "Correct": 92,
+    "Total": 100
+  },
+  {
+    "K": 10,
+    "Configuration": "graph_only",
+    "Accuracy (%)": 88.0,
+    "Correct": 88,
+    "Total": 100
+  },
+  {
+    "K": 10,
+    "Configuration": "combined",
+    "Accuracy (%)": 88.0,
+    "Correct": 88,
+    "Total": 100
+  },
+  {
+    "K": 15,
+    "Configuration": "evidence_only",
+    "Accuracy (%)": 90.0,
+    "Correct": 90,
+    "Total": 100
+  },
+  {
+    "K": 15,
+    "Configuration": "graph_only",
+    "Accuracy (%)": 83.0,
+    "Correct": 83,
+    "Total": 100
+  },
+  {
+    "K": 15,
+    "Configuration": "combined",
+    "Accuracy (%)": 89.0,
+    "Correct": 89,
+    "Total": 100
+  },
+  {
+    "K": 20,
+    "Configuration": "evidence_only",
+    "Accuracy (%)": 91.0,
+    "Correct": 91,
+    "Total": 100
+  },
+  {
+    "K": 20,
+    "Configuration": "graph_only",
+    "Accuracy (%)": 86.0,
+    "Correct": 86,
+    "Total": 100
+  },
+  {
+    "K": 20,
+    "Configuration": "combined",
+    "Accuracy (%)": 92.0,
+    "Correct": 92,
+    "Total": 100
+  }
+]

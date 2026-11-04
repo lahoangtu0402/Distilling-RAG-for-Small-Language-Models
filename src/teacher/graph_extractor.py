@@ -19,8 +19,6 @@ def extract_graph_triples(evidences: list[str]) -> str:
         messages=[{"role": "user", "content": prompt}],
         temperature=0.1
     )
-    
-    //print("\nGraph extractor's response: \n", response)
 
     graph_output = response.choices[0].message.content.strip()
     

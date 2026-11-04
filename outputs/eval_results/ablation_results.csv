@@ -1,0 +1,14 @@
+K,Configuration,Accuracy (%),Correct,Total
+0,original,85.0,85,100
+5,evidence_only,84.0,84,100
+5,graph_only,83.0,83,100
+5,combined,83.0,83,100
+10,evidence_only,92.0,92,100
+10,graph_only,88.0,88,100
+10,combined,88.0,88,100
+15,evidence_only,90.0,90,100
+15,graph_only,83.0,83,100
+15,combined,89.0,89,100
+20,evidence_only,91.0,91,100
+20,graph_only,86.0,86,100
+20,combined,92.0,92,100
