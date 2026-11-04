@@ -6,38 +6,45 @@ distilling-rag-for-small-language-models/
 │       └── medmcqa_pilot.jsonl
 │
 ├── outputs/                      # Thư mục lưu kết quả trung gian & kết quả thực nghiệm
-│   ├── evidences/                # Bằng chứng được Teacher LLM sinh ra
+│   ├── evidences/                # Cache bằng chứng được Teacher LLM sinh ra
+│   │   └── teacher_cached_data.json
 │   ├── graphs/                   # Knowledge Graphs (triples) dạng đơn/đa đồ thị
 │   └── eval_results/             # Kết quả log accuracy, metrics của Student SLM
+│       ├── ablation_results.csv
+│       └── ablation_results.json
 │
-├── src/                          # Mã nguồn chính của dự án
+├── src/                          # Mã nguồn chính của dự án (Modular Design)
 │   ├── __init__.py
 │   ├── config.py                 # File cấu hình (API Keys, Paths, Hyperparameters)
-│   ├── teacher/                  # Module giao tiếp với Teacher LLM
+│   ├── teacher/                  # Module giao tiếp với Teacher LLM (OpenAI API)
 │   │   ├── __init__.py
-│   │   ├── generator.py          # Evidence Generation (Step 1)
-│   │   └── graph_extractor.py    # Graph Triple Extraction & Aggregation (Step 3)
+│   │   ├── generator.py          # [Step 1] Sinh N evidences
+│   │   └── graph_extractor.py    # [Step 3] Trích xuất & gom nhóm Graph Triples
 │   │
 │   ├── retriever/                # Module xếp hạng & lọc bằng chứng
 │   │   ├── __init__.py
-│   │   └── ranker.py             # Cosine Sim + LLM Score Ranking (Step 2)
+│   │   └── ranker.py             # [Step 2] Cosine Sim Ranking với SentenceTransformer
 │   │
 │   ├── student/                  # Module chạy và đánh giá Student SLM trên Mac M2
 │   │   ├── __init__.py
-│   │   ├── local_runner.py       # Chạy PyTorch (MPS) hoặc Ollama Local
-│   │   └── evaluator.py          # Tính Accuracy, F1,... (Step 4)
+│   │   ├── local_runner.py       # [Step 4] Chạy PyTorch (MPS) nạp weights & Inference
+│   │   └── evaluator.py          # Module tính các chỉ số đánh giá (Accuracy, F1,...)
 │   │
-│   └── utils/                    # Các hàm phụ trợ
+│   └── utils/                    # Các hàm phụ trợ và bảo mật dữ liệu
 │       ├── __init__.py
+│       ├── privacy.py            # [Privacy Filter] Làm sạch PII (Regex + Local SLM)
 │       ├── data_loader.py        # Đọc/ghi các file dữ liệu JSONL
 │       └── metrics.py            # Hàm tính độ chính xác
 │
 ├── scripts/                      # Các script chạy thực nghiệm tự động
-│   ├── prepare_data.py           # Script chuẩn bị dữ liệu pilot (300-500 câu)
-│   ├── run_pipeline.py           # Script chạy toàn bộ pipeline DRAG
-│   └── run_baselines.py          # Script chạy so sánh với SLM gốc (Original SLM)
+│   ├── prepare_data.py           # Script tải & chuẩn bị tập dữ liệu pilot
+│   ├── run_pipeline.py           # Script chạy Pipeline DRAG tương tác (CLI Menu)
+│   ├── run_drag_with_privacy_demo.py  # Script chạy Demo DRAG có bảo mật PII
+│   ├── run_ablation.py           # Script chạy thực nghiệm Ablation Study tự động
+│   └── run_baselines.py          # Script chạy đánh giá so sánh với các baseline
 │
 ├── .env                          # Lưu biến môi trường (OPENAI_API_KEY,...)
 ├── .gitignore                    # Bỏ qua data/raw, outputs/, .env, venv/
 ├── requirements.txt              # Thư viện Python cần thiết
+├── setup.py                      # Đóng gói package nội bộ (pip install -e .)
 └── README.md                     # Hướng dẫn chạy thực nghiệm & mô tả bài báo
